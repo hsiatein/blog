@@ -44,10 +44,10 @@ li.index{
 }
 iframe#preview{
     position: fixed;
-    top: 60px;
+    top: 10px;
     left: 500px;
     width: 1080px;
-    height: 720px;
+    height: 700px;
     display: none;
     border-radius: 10px;
 }
@@ -56,7 +56,7 @@ button{
     height: 40px;
     display: none;
     position: fixed;
-    top: 790px;
+    top: 720px;
     left: 960px;
     background-color: aliceblue;
     color: grey;
