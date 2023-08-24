@@ -1,16 +1,5 @@
 const files = [
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
-    { name: "file", url: "image/test.jpg" },
+    { name: "在kemono实验网络爬虫"},
   ];
 const ol = document.createElement("ol");
 files.forEach((file) => {
@@ -20,7 +9,7 @@ files.forEach((file) => {
   a.textContent = file.name;
   a.href = "javascript:void(0)";
   a.onclick=function() {
-    toggleIframe('preview', file.url);
+    toggleIframe('preview', "pages/"+file.name+".html");
   };
   li.appendChild(a);
   ol.appendChild(li);
