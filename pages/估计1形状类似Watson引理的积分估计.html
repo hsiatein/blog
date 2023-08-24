@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  </head>
+  <body>
+    <a class="backtohome" href="../home.html">主页</a>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <main>
+        <h1 id="title">估计1:形状类似Watson引理的积分估计</h1>
+        <article>
+          <p>
+            本文考虑形如下式的积分估计
+            $$\int_0^1{t^{a-1}\left( \ln \frac{1}{t} \right) ^be^{-xt}dt}$$
+          </p>
+          <p>
+            首先经过简单的变形, 可以得到
+          </p>
+          <p>
+            $$\begin{align}
+            &=\int_0^{\infty}{e^{-au}u^be^{-xe^{-u}}du}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\int_{-\ln x}^{\infty}{e^{-au}\left( \frac{u}{\ln x}+1 \right) ^be^{-e^{-u}}du}
+            \end{align}$$
+          </p>
+          <p>
+            考虑使用拆分区间, 以及展开括号
+          </p>
+          <p>
+            $$\begin{align}
+            &=\frac{\left( \ln x \right) ^b}{x^a}\int_{-\ln x}^{\ln x}{e^{-au}\left( \frac{u}{\ln x}+1 \right) ^be^{-e^{-u}}du}+\frac{\left( \ln x \right) ^b}{x^a}\int_{\ln x}^{\infty}{e^{-au}\left( \frac{u}{\ln x}+1 \right) ^be^{-e^{-u}}du}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{1}{\left( \ln x \right) ^n}\int_{-\ln x}^{\ln x}{e^{-au}u^ne^{-e^{-u}}du}}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{1}{\left( \ln x \right) ^n}\left( \int_{-\infty}^{\infty}{e^{-au}u^ne^{-e^{-u}}du}-\int_{-\infty}^{-\ln x}{e^{-au}u^ne^{-e^{-u}}du}-\int_{\ln x}^{\infty}{e^{-au}u^ne^{-e^{-u}}du} \right)}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{1}{\left( \ln x \right) ^n}\left( \begin{array}{c}
+              \left( -1 \right) ^n\Gamma ^{\left( n \right)}\left( a \right) -\left( -1 \right) ^nx^ae^{-x}\int_0^{\infty}{\left( t+1 \right) ^{a-1}\left( \ln x+\ln \left( t+1 \right) \right) ^ne^{-xt}dt}\\
+              -\left( -1 \right) ^n\int_0^{\frac{1}{x}}{t^{a-1}\left( \ln t \right) ^ne^{-t}dt}\\
+            \end{array} \right)}
+            \end{align}$$
+          </p>
+          <p>
+            分别证明括号里两项含积分的项都是低阶量:
+            先是第一个
+          </p>
+          <p>
+            $$\begin{align}
+            &|\int_0^{\infty}{\left( t+1 \right) ^{a-1}\left( \ln x+\ln \left( t+1 \right) \right) ^ne^{-xt}dt}|
+            \\
+            &\leqslant |\left( \ln x \right) ^n\int_0^{\infty}{\left( t+1 \right) ^{a-1}\left( 1+\ln \left( t+1 \right) \right) ^ne^{-xt}dt}|
+            \\
+            &\leqslant |\left( \ln x \right) ^n\int_0^{\infty}{\left( t+1 \right) ^{a+n-1}e^{-xt}dt}|=O\left( \frac{\left( \ln x \right) ^n}{x} \right) 
+            \end{align}$$
+          </p>
+          <p>
+            再是第二个
+          </p>
+          <p>
+            $$\begin{align}
+            &|\int_0^{\frac{1}{x}}{t^{a-1}\left( \ln t \right) ^ne^{-t}dt}|
+            \\
+            &\leqslant |\frac{\left( \ln x \right) ^n}{x^a}\int_0^1{t^{a-1}\left( 1-\frac{\ln t}{\ln x} \right) ^ndt}|
+            \\
+            &\leqslant \frac{\left( \ln x \right) ^n}{x^a}\int_0^1{t^{a-1}\left( 1-\ln t \right) ^ndt}=O\left( \frac{\left( \ln x \right) ^n}{x^a} \right)             
+            \end{align}$$
+          </p>
+          <p>
+            整合在一起得到
+          </p>
+          <p>
+            $$\begin{align}
+            &\int_0^1{t^{a-1}\left( \ln \frac{1}{t} \right) ^be^{-xt}dt}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{1}{\left( \ln x \right) ^n}\left( \begin{array}{c}
+              \left( -1 \right) ^n\Gamma ^{\left( n \right)}\left( a \right) -\left( -1 \right) ^nx^ae^{-x}\int_0^{\infty}{\left( t+1 \right) ^{a-1}\left( \ln x+\ln \left( t+1 \right) \right) ^ne^{-xt}dt}\\
+              -\left( -1 \right) ^n\int_0^{\frac{1}{x}}{t^{a-1}\left( \ln t \right) ^ne^{-t}dt}\\
+            \end{array} \right)}
+            \\
+            &=\frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{1}{\left( \ln x \right) ^n}\left( \left( -1 \right) ^n\Gamma ^{\left( n \right)}\left( a \right) -O\left( x^{a-1}e^{-x}\left( \ln x \right) ^n \right) -O\left( \frac{\left( \ln x \right) ^n}{x^a} \right) \right)}
+            \\
+            &\sim \frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+              b\\
+              n\\
+            \end{array} \right) \frac{\left( -1 \right) ^n\Gamma ^{\left( n \right)}\left( a \right)}{\left( \ln x \right) ^n}}
+            \end{align}$$
+          </p>
+          <p>
+            即我们有下式:
+            $$
+            \int_0^1{t^{a-1}\left( \ln \frac{1}{t} \right) ^be^{-xt}dt}\sim \frac{\left( \ln x \right) ^b}{x^a}\sum_{n=0}^{\infty}{\left( \begin{array}{c}
+            b\\
+            n\\
+            \end{array} \right) \frac{\left( -1 \right) ^n\Gamma ^{\left( n \right)}\left( a \right)}{\left( \ln x \right) ^n}}
+            $$
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>
