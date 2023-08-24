@@ -1,0 +1,84 @@
+header{
+    font-family: "Noto Sans SC", sans-serif;
+    font-size: 36px;
+    margin: 0 auto; 
+    display: block;
+    text-align: center;
+    width: 550px;
+    height: 100px;
+    background-color: aliceblue;
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgb(138, 200, 255);
+    border-radius: 10px;
+}
+h1#author{
+    color: rgb(0, 136, 255);
+    margin: 0px;
+    height: 100px;
+}
+body {
+    font-family: "Noto Sans SC", sans-serif;
+    background-image: url('image/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: scroll;
+}
+div#index{
+    width: 400px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgb(138, 201, 255);
+    border-radius: 10px;
+    margin: 100px 10px 100px 10px;
+    background-color: aliceblue;
+}
+h2.index{
+    padding: 10px 0px 0px 30px;
+}
+ol{
+    padding-left: 50px;
+}
+li.index{
+    padding: 10px 0px 10px 10px;
+}
+iframe#preview{
+    position: fixed;
+    top: 60px;
+    left: 500px;
+    width: 1080px;
+    height: 720px;
+    display: none;
+    border-radius: 10px;
+}
+button{
+    width: 100px;
+    height: 40px;
+    display: none;
+    position: fixed;
+    top: 790px;
+    left: 960px;
+    background-color: aliceblue;
+    color: grey;
+    font-size: 20px;
+    border-radius: 5px;
+}
+footer{
+    font-family: "Noto Sans SC", sans-serif;
+    margin: 100px 10px 100px 10px;
+    width: 270px;
+    background-color: aliceblue;
+    border-width: 10px;
+    border-style: solid;
+    border-color: rgb(138, 200, 255);
+    border-radius: 10px;
+    padding: 10px 10px 10px 50px;
+}
+a:link{
+    color: rgb(0, 136, 255);
+    text-decoration: none;
+}
+a:visited{
+    color: rgb(0, 136, 255);
+    text-decoration: none;
+}
