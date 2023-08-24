@@ -1,5 +1,5 @@
 const files = [
-    { name: "在kemono实验网络爬虫"},
+    { name: "实现简单的网络爬虫"},
   ];
 const ol = document.createElement("ol");
 files.forEach((file) => {
