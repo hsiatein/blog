@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <a class="backtohome" href="../home.html">主页</a>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <main>
+        <h1 id="title">估计3:有关黎曼勒贝格引理的积分估计</h1>
+        <article>
+          <p>
+            这次所带来的估计是涉及到黎曼勒贝格引理的积分估计
+          </p>
+          <p>
+            首先, 我们考虑如下积分, 其中 \(g \) 是一个周期函数
+            $$
+            \int_a^b{f\left( x \right) g\left( \lambda x \right) dx}
+            $$
+            将周期函数 \(g \) 展开为傅里叶级数(这里为了方便, 以其是偶周期函数为例), 然后进行积分, 可以得到
+            $$
+            \begin{align}
+            &g\left( x \right) =\sum_{n=0}^{\infty}{a_n\cos \frac{2\pi nx}{T}}
+            \\
+            &\int_a^b{f\left( x \right) g\left( \lambda x \right) dx}
+            \\
+            &=\sum_{n=0}^{\infty}{a_n\int_a^b{f\left( x \right) \cos \frac{2\pi n\lambda x}{T}dx}}
+            \\
+            &=a_0\int_a^b{f\left( x \right) dx}+\sum_{n=1}^{\infty}{a_n\int_a^b{f\left( x \right) \cos \frac{2\pi n\lambda x}{T}dx}}
+            \\
+            &=\frac{1}{T}\int_0^T{g\left( x \right) dx}\int_a^b{f\left( x \right) dx}+\sum_{n=1}^{\infty}{a_n\int_a^b{f\left( x \right) \cos \frac{2\pi n\lambda x}{T}dx}}
+            \end{align}
+            $$
+          </p>
+          <p>
+            可以看到最后一行, 左边一项就是推广后的黎曼引理, 右边那项我们将用来求估计的高阶项, 考察以下这个例子:
+            $$
+            \int_0^{\pi}{\frac{\sin x}{1+\cos ^2nx}dx}=\sqrt{2}-\sum_{m=1}^{\infty}{\frac{\mathrm{Li}_{2m}\left( 2\sqrt{2}-3 \right)}{2^{2m-\frac{3}{2}}}\frac{1}{n^{2m}}}
+            $$
+          </p>
+          <p>
+            证明:
+            \begin{align}
+            &\int_0^{\pi}{\frac{\sin x}{1+\cos ^2nx}dx}
+            \\
+            &=2\int_0^{\pi}{\frac{\sin x}{3+\cos 2nx}dx}
+            \\
+            &=2\int_0^{\pi}{\sin x\left( \frac{1}{2\sqrt{2}}+\frac{1}{\sqrt{2}}\sum_{k=1}^{\infty}{\left( -1 \right) ^ke^{-k\ln \left( 3+2\sqrt{2} \right)}\cos 2nkx} \right) dx}
+            \\
+            &=\sqrt{2}+\sqrt{2}\sum_{k=1}^{\infty}{\left( -1 \right) ^ke^{-k\ln \left( 3+2\sqrt{2} \right)}}\int_0^{\pi}{\sin x\cos 2nkxdx}
+            \\
+            &=\sqrt{2}-2\sqrt{2}\sum_{k=1}^{\infty}{\left( -1 \right) ^k\frac{e^{-k\ln \left( 3+2\sqrt{2} \right)}}{4n^2k^2-1}}
+            \\
+            &=\sqrt{2}-\frac{1}{\sqrt{2}n^2}\sum_{k=1}^{\infty}{\left( -1 \right) ^k\frac{e^{-k\ln \left( 3+2\sqrt{2} \right)}}{k^2}\sum_{m=0}^{\infty}{\frac{1}{4^mn^{2m}k^{2m}}}}
+            \\
+            &=\sqrt{2}-\frac{1}{\sqrt{2}}\sum_{m=0}^{\infty}{\frac{1}{4^mn^{2m+2}}}\sum_{k=1}^{\infty}{\left( -1 \right) ^k\frac{e^{-k\ln \left( 3+2\sqrt{2} \right)}}{k^{2+2m}}}
+            \\
+            &=\sqrt{2}-\sum_{m=1}^{\infty}{\frac{\mathrm{Li}_{2m}\left( 2\sqrt{2}-3 \right)}{2^{2m-\frac{3}{2}}}\frac{1}{n^{2m}}}
+            \end{align}
+          </p>
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <a class="backtohome" href="../home.html">主页</a>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <main>
+        <h1 id="title">估计4:使用围道和极点进行积分估计</h1>
+        <article>
+          <p>
+            这次所带来的估计是涉及围道和极点的积分估计. 经过复分析的学习, 我们知道留数可以用于计算级数和, 也就是说一个(发散)级数的估计可以通过留数转化为围道积分的估计, 
+            考虑如下的有限级数, 其有如下的估计, 我们来求此估计:
+            $$
+            \sum_{k=1}^{n-1}{\frac{1}{\sin \frac{k\pi}{n}}}=\frac{2}{\pi}n\ln n+\frac{2}{\pi}\left( \ln \frac{2}{\pi}+\gamma \right) n+\frac{1}{\pi}\sum_{k=1}^{\infty}{\frac{B_{2k}\zeta \left( 2k \right) \left( 2-2^{2k} \right)}{k2^{2k-1}n^{2k-1}}}
+            $$
+          </p>
+          <p>
+            证明:
+          </p>
+          <p>
+            $$\begin{align}
+            &\sum_{k=1}^{n-1}{\frac{1}{\sin \frac{k\pi}{n}}}=\frac{1}{2\pi i}\int_{\Gamma}{\frac{1}{\sin \frac{x}{n}\tan x}dx}
+            \\
+            &\Gamma : \infty i\rightarrow -\infty i\rightarrow n\pi -\infty i\rightarrow n\pi +\infty i\rightarrow \infty i
+            \end{align}$$
+          </p>
+          <p>
+            \(\Gamma\) 是矩形围道, 并且用小圆弧来绕过 \(0\) 和 \(n\pi\) 两个极点. 拆分围道积分, 就能得到如下的几个积分:
+          </p>
+          <p>
+            $$
+            \sum_{k=1}^{n-1}{\frac{1}{\sin \frac{k\pi}{n}}}=\frac{2}{\pi}\int_r^{\infty}{\frac{1}{\sinh \frac{x}{n}\tanh x}dx}+\frac{1}{2\pi i}\int_{C_1}{\frac{1}{\sinh \frac{x}{n}\tanh x}dx}+\frac{1}{2\pi i}\int_{C_2}{\frac{1}{\sinh \frac{x}{n}\tanh x}dx}
+            $$
+          </p>
+          <p>
+            将第一个积分里的 \(\tanh\) 函数转换成普通的指数函数, 并且注意到二三两项积分是小圆弧上的积分, 所以只需要考虑洛朗展开次数为负的项即可
+          </p>
+          <p>
+            $$
+            =\frac{2}{\pi}\left( \int_{2r}^{\infty}{\frac{1}{\sinh \frac{x}{2n}}\frac{e^{-x}}{1-e^{-x}}dx}+\int_r^{\infty}{\frac{1}{\sinh \frac{x}{n}}dx} \right) +\frac{1}{2\pi i}\int_{C_1}{\frac{n}{x^2}dx}+\frac{1}{2\pi i}\int_{C_2}{\frac{n}{x^2}dx}+O\left( r \right) 
+            $$
+          </p>
+          <p>
+            将括号内含 \(n\) 的 \(\sinh\) 函数展开成幂级数(借助伯努利数), 得到的积分便很容易了, 计算出来并化简, 最后让 \(r\) 趋于 \(0\) 就得到了我们需要的式子
+          </p>
+          \begin{align}
+          &=\frac{2}{\pi}\left( 2n\int_{2r}^{\infty}{\frac{1}{x}\frac{e^{-x}}{1-e^{-x}}dx}+2n\sum_{k=2}^{\infty}{\frac{B_k\left( 2-2^k \right)}{k!2^kn^k}}\int_r^{\infty}{\frac{x^{k-1}e^{-x}}{1-e^{-x}}dx}-n\ln\tanh \frac{r}{2n} \right) -\frac{2n}{\pi r}+O\left( r \right) 
+          \\
+          &=\frac{2}{\pi}\left( \begin{array}{c}
+            2n\left( \frac{1}{2r}+\frac{1}{2}\ln r+\frac{\gamma}{2}-\frac{1}{2}\ln \pi +O\left( r \right) \right)\\
+            +\sum_{k=2}^{\infty}{\frac{B_k\left( 2-2^k \right) \zeta \left( k \right)}{k2^{k-1}n^{k-1}}}-n\ln r+n\ln 2+n\ln n+O\left( r \right)\\
+          \end{array} \right) -\frac{2n}{\pi r}+O\left( r \right) 
+          \\
+          &r\rightarrow 0,\sum_{k=1}^{n-1}{\frac{1}{\sin \frac{k\pi}{n}}}=\frac{2}{\pi}n\ln n+\frac{2}{\pi}\left( \ln \frac{2}{\pi}+\gamma \right) n+\frac{1}{\pi}\sum_{k=1}^{\infty}{\frac{B_{2k}\zeta \left( 2k \right) \left( 2-2^{2k} \right)}{k2^{2k-1}n^{2k-1}}}
+          \end{align}
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>

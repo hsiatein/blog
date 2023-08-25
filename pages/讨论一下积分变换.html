@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <a class="backtohome" href="../home.html">主页</a>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <main>
+        <h1 id="title">讨论一下积分变换</h1>
+        <article>
+          <p>
+            积分变换被广泛应用于各种地方, 我们熟知的傅里叶变换及其逆变换, 拉普拉斯变换及其逆变换, 梅林变换及其逆变换都是积分变换. 但是假如我自己给出一个独特的核函数, 
+            然后问用这个核函数来进行积分变化, 是否可取? 如果可以那么逆变换该有怎样一个形式? 这篇文章将讨论这个问题. 
+          </p>
+          <a href="../files/积分变换的一般观点.pdf">积分变换的一般观点.pdf</a>
+          <p>
+            以下是结论: 考虑这样一类积分变换
+            $$F\left( y \right) =\int_0^{\infty}{f\left( x \right) K\left( xy \right) dx}$$
+            我们定义通过核函数的震荡使积分收敛的变换为震荡型积分变换, 例如傅里叶变换; 
+            再定义通过核函数的快速减小使积分收敛的变换为指数型积分变换, 例如拉普拉斯变换.
+          </p>
+          <p>
+            设函数经过指数型变换得到, 则其逆变换由下式给出
+          </p>
+          <p>
+            $$f\left( x \right) =\frac{1}{2\pi i}\int_{\sigma -i\infty}^{\sigma +i\infty}{F\left( y \right) K^{-1}\left( xy \right) dy}
+            $$
+          </p>
+          <p>
+            其中核函数满足
+          </p>
+          <p>
+            $$\mathscr{M}K\left( n+1 \right) \frac{1}{2\pi i}\int_{\sigma -i\infty}^{\sigma +i\infty}{\frac{K^{-1}\left( y \right)}{y^{n+1}}dy}=1
+            $$
+          </p>
+          <p>
+            设函数经过震荡型变换得到, 则其逆变换由下式给出
+          </p>
+          <p>
+            $$f\left( x \right) =\int_0^{\infty}{F\left( y \right) K^{-1}\left( xy \right) dy}
+            $$
+          </p>
+          <p>
+            其中核函数满足
+          </p>
+          <p>
+            $$K^{-1}\left( xy \right) =\frac{1}{2\pi i}\int_{\sigma -i\infty}^{\sigma +i\infty}{\frac{1}{\mathscr{M} K\left( 1-\mu \right)}\left( xy \right) ^{-\mu}d\mu}
+            $$
+          </p>
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>

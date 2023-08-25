@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  </head>
+  <body>
+    <a class="backtohome" href="../home.html">主页</a>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <main>
+        <h1 id="title">估计2:涉及泊松核的积分估计</h1>
+        <article>
+          <p>
+            这次所带来的估计是两个涉及到泊松核的积分估计
+          </p>
+          <p>
+            第一个是泊松核一次方
+            $$
+            \begin{align}
+            &{\color[RGB]{240, 0, 0} f\left( x \right) =a_0+a_1x+a_2x^2+o\left( x^2 \right) }
+            \\
+            &{\color[RGB]{240, 0, 0} \int_0^{\pi}{\frac{f\left( x \right)}{1-2t\cos x+t^2}dx}\sim \frac{\pi a_0}{2}\frac{1}{1-t}-a_1\ln \left( 1-t \right) +o\left( \ln \left( 1-t \right) \right) }
+            \end{align}
+            $$
+          </p>
+          <p>
+            第二个是泊松核二次方
+            $$
+            \begin{align}
+            &{\color[RGB]{240, 0, 0} f\left( x \right) =a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+o\left( x^4 \right) }
+            \\
+            &{\color[RGB]{240, 0, 0} \int_0^{\pi}{\frac{f\left( x \right)}{\left( 1-2t\cos x+t^2 \right) ^2}dx}}
+            \\
+            &{\color[RGB]{240, 0, 0} =\frac{\pi a_0}{4}\frac{1}{\left( 1-t \right) ^3}+\left( \frac{\pi a_0}{8}+\frac{a_1}{2} \right) \frac{1}{\left( 1-t \right) ^2}+\left( \frac{\pi a_0}{8}+\frac{a_1}{2}+\frac{\pi a_2}{4} \right) \frac{1}{\left( 1-t \right)}-\left( a_3+\frac{a_1}{6} \right) \ln \left( 1-t \right) +o\left( \ln \left( 1-t \right) \right) }
+            \end{align}
+            $$
+          </p>
+          <p>
+            证明1:
+            $$
+            \begin{align}
+            &\left( 1 \right) \int_0^{\pi}{\frac{1}{1-2t\cos x+t^2}dx}
+            \\
+            &=\int_0^{\pi}{\sum_{n=1}^{\infty}{t^{n-1}\frac{\sin nx}{\sin x}}dx}
+            \\
+            &=\sum_{n=1}^{\infty}{t^{n-1}\int_0^{\pi}{\frac{\sin nx}{\sin x}dx}}
+            \\
+            &=\pi \sum_{n=1}^{\infty}{t^{2n-2}}=\pi \frac{1}{1-t^2}
+            \\
+            &\left( 2 \right) \int_0^{\pi}{\frac{\sin x}{1-2t\cos x+t^2}dx}
+            \\
+            &=\int_0^{\pi}{\sum_{n=1}^{\infty}{t^{n-1}}\sin nxdx}
+            \\
+            &=\sum_{n=1}^{\infty}{t^{n-1}}\int_0^{\pi}{\sin nxdx}
+            \\
+            &=\sum_{n=1}^{\infty}{\frac{2t^{2n-2}}{2n-1}}=\frac{1}{t}\ln \left( \frac{1+t}{1-t} \right) 
+            \\
+            &\left( 3 \right) \int_0^{\pi}{\frac{a_2x^2+o\left( x^2 \right)}{1-2t\cos x+t^2}dx}=O\left( 1 \right) 
+            \\
+
+            \\
+            &f\left( x \right) =a_0+a_1x+a_2x^2+o\left( x^2 \right) =a_0+a_1\sin x+a_2x^2+o\left( x^2 \right) 
+            \\
+            &\int_0^{\pi}{\frac{f\left( x \right)}{1-2t\cos x+t^2}dx}
+            \\
+            &=\int_0^{\pi}{\frac{a_0+a_1\sin x+a_2x^2+o\left( x^2 \right)}{1-2t\cos x+t^2}dx}
+            \\
+            &=a_0\int_0^{\pi}{\frac{1}{1-2t\cos x+t^2}dx}+a_1\int_0^{\pi}{\frac{\sin x}{1-2t\cos x+t^2}dx}+\int_0^{\pi}{\frac{ax^2+o\left( x^2 \right)}{1-2t\cos x+t^2}dx}
+            \\
+            &=\pi a_0\frac{1}{1-t^2}+\frac{a_1}{t}\ln \left( \frac{1+t}{1-t} \right) +O\left( 1 \right) 
+            \\
+            &=\frac{\pi a_0}{2}\frac{1}{1-t}-a_1\ln \left( 1-t \right) +O\left( 1 \right) 
+            \end{align}
+            $$
+          </p>
+          <p>
+            证明2:
+            $$
+            \begin{align}
+            &\left( 1 \right) 
+            \\
+            &\int_0^{\pi}{\frac{1}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\frac{1}{2}\int_{-\pi}^{\pi}{\left( \frac{1}{1-t^2}+2\sum_{n=1}^{\infty}{\frac{t^n}{1-t^2}}\cos nx \right) ^2dx}
+            \\
+            &=\pi \left( \frac{1}{1-t^2} \right) ^2+2\pi \sum_{n=1}^{\infty}{\left( \frac{t^n}{1-t^2} \right) ^2}
+            \\
+            &=\frac{\pi}{\left( 1-t \right) ^2\left( 1+t \right) ^2}+\frac{2\pi t^2}{\left( 1-t \right) ^3\left( 1+t \right) ^3}
+            \\
+            &=\frac{\pi \left( 1+t^2 \right)}{\left( 1-t \right) ^3\left( 1+t \right) ^3}
+            \\
+            &\left( 2 \right) 
+            \\
+            &\int_0^{\pi}{\frac{\sin x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\frac{1}{2t}\int_0^{\pi}{\frac{1}{\left( 1-2t\cos x+t^2 \right) ^2}d\left( 1-2t\cos x+t^2 \right)}
+            \\
+            &=-\frac{1}{2t}\int_0^{\pi}{d\frac{1}{1-2t\cos x+t^2}}
+            \\
+            &=-\frac{1}{2t}\frac{1}{1-2t\cos x+t^2}|_{0}^{\pi}
+            \\
+            &=-\frac{1}{2t}\frac{1}{\left( 1+t \right) ^2}+\frac{1}{2t}\frac{1}{\left( 1-t \right) ^2}
+            \\
+            &\left( 3 \right) 
+            \\
+            &\int_0^{\pi}{\frac{\sin ^2x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\frac{1}{2}\int_{-\pi}^{\pi}{\left( \sum_{n=1}^{\infty}{t^{n-1}}\sin nx \right) ^2dx}
+            \\
+            &=\frac{\pi}{2}\sum_{n=1}^{\infty}{t^{2n-2}}
+            \\
+            &=\frac{1}{2}\frac{\pi}{\left( 1-t \right) \left( 1+t \right)}
+            \\
+            &\left( 4 \right) 
+            \\
+            &\int_0^{\pi}{\frac{\sin ^3x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\frac{1}{2t}\int_0^{\pi}{\frac{\sin ^2x}{\left( 1-2t\cos x+t^2 \right) ^2}d\left( 1-2t\cos x+t^2 \right)}
+            \\
+            &=-\frac{1}{2t}\int_0^{\pi}{\sin ^2xd\frac{1}{1-2t\cos x+t^2}}
+            \\
+            &=-\frac{1}{2t}\frac{\sin ^2x}{1-2t\cos x+t^2}|_{0}^{\pi}+\frac{1}{t}\int_0^{\pi}{\frac{\sin x\cos x}{1-2t\cos x+t^2}dx}
+            \\
+            &=\frac{1}{t}\int_0^{\pi}{\frac{\sin x\cos x}{1-2t\cos x+t^2}dx}=\frac{1}{t}\int_{-1}^1{\frac{x}{1-2tx+t^2}dx}=-\ln \left( 1-t \right) +O\left( 1 \right) 
+            \\
+            &\left( 5 \right) 
+            \\
+            &\int_0^{\pi}{\frac{\left( a_4+\frac{a_2}{3} \right) x^4+o\left( x^4 \right)}{\left( 1-2t\cos x+t^2 \right) ^2}dx}=O\left( 1 \right) 
+            \\
+            
+            \\
+            &f\left( x \right) =a_0+a_1x+a_2x^2+a_3x^3+a_4x^4+o\left( x^4 \right) 
+            \\
+            &=a_0+a_1\sin x+a_2\sin ^2x+\left( a_3+\frac{a_1}{6} \right) \sin ^3x+\left( a_4+\frac{a_2}{3} \right) x^4+o\left( x^4 \right) 
+            \\
+            &\int_0^{\pi}{\frac{f\left( x \right)}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\int_0^{\pi}{\frac{a_0+a_1\sin x+a_2\sin ^2x+\left( a_3+\frac{a_1}{6} \right) \sin ^3x+\left( a_4+\frac{a_2}{3} \right) x^4+o\left( x^4 \right)}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=a_0\int_0^{\pi}{\frac{1}{\left( 1-2t\cos x+t^2 \right) ^2}dx}+a_1\int_0^{\pi}{\frac{\sin x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}+a_2\int_0^{\pi}{\frac{\sin ^2x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &+\left( a_3+\frac{a_1}{6} \right) \int_0^{\pi}{\frac{\sin ^3x}{\left( 1-2t\cos x+t^2 \right) ^2}dx}+\int_0^{\pi}{\frac{\left( a_4+\frac{a_2}{3} \right) x^4+o\left( x^4 \right)}{\left( 1-2t\cos x+t^2 \right) ^2}dx}
+            \\
+            &=\frac{\pi a_0\left( 1+t^2 \right)}{\left( 1-t \right) ^3\left( 1+t \right) ^3}-\frac{a_1}{2t}\frac{1}{\left( 1+t \right) ^2}+\frac{a_1}{2t}\frac{1}{\left( 1-t \right) ^2}+\frac{a_2}{2}\frac{\pi}{\left( 1-t \right) \left( 1+t \right)}-\left( a_3+\frac{a_1}{6} \right) \ln \left( 1-x \right) +O\left( 1 \right) 
+            \\
+            &=\frac{\pi a_0}{4}\frac{1}{\left( 1-t \right) ^3}+\left( \frac{\pi a_0}{8}+\frac{a_1}{2} \right) \frac{1}{\left( 1-t \right) ^2}+\left( \frac{\pi a_0}{8}+\frac{a_1}{2}+\frac{\pi a_2}{4} \right) \frac{1}{\left( 1-t \right)}-\left( a_3+\frac{a_1}{6} \right) \ln \left( 1-t \right) +O\left( 1 \right)             
+            \end{align}
+            $$
+          </p>
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>
