@@ -9,7 +9,7 @@ header{
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(138, 200, 255);
+    border-color: rgb(82, 173, 252);
     border-radius: 10px;
 }
 h1#author{
@@ -23,7 +23,7 @@ div#label{
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(138, 200, 255);
+    border-color: rgb(82, 173, 252);
     border-radius: 10px;
     padding: 10px 10px 10px 50px;
 }
@@ -50,7 +50,7 @@ main{
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(73, 170, 255);
+    border-color: rgb(82, 173, 252);
     border-radius: 10px;
     margin: 100px 10px 100px 10px;
 }
@@ -79,7 +79,7 @@ footer{
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(138, 200, 255);
+    border-color: rgb(82, 173, 252);
     border-radius: 10px;
     padding: 10px 10px 10px 50px;
 }
@@ -99,14 +99,14 @@ a.backtohome{
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(172, 216, 255);
+    border-color: rgb(82, 173, 252);
     border-radius: 5px;
 }
 pre{
-    background-color: rgb(231, 237, 242);
+    background-color: rgb(227, 242, 255);
     border-width: 4px;
     border-style: solid;
-    border-color: rgb(172, 216, 255);
+    border-color: rgb(131, 197, 255);
     border-radius: 5px;
 }
 img {
