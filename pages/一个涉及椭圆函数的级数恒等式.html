@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../pagedata.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <div id="label">
+      <table>
+        <h2>
+          标签
+        </h2>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <a class="backtohome" href="../home.html">主页</a>
+    <main>
+        <h1 id="title">一个涉及椭圆函数的级数恒等式</h1>
+        <script src="../labelgen.js"></script>
+        <article>
+          <p>
+            本文章将解决如下的级数
+            $$
+            {\color[RGB]{240, 0, 0} \frac{1}{\left( \sum_{n=-\infty}^{\infty}{\frac{\cos k\theta}{\cosh k\pi}} \right) ^2}+\frac{1}{\left( \sum_{n=-\infty}^{\infty}{\frac{\cosh k\theta}{\cosh k\pi}} \right) ^2}=\frac{2\Gamma ^4\left( \frac{3}{4} \right)}{\pi}}
+            $$
+          </p>
+          <p>
+            我们知道如下的椭圆函数\(\mathrm{dn}\)的傅里叶级数, 此傅里叶级数的推导方法可以参考本人的这个视频:
+            <a href="https://www.bilibili.com/video/BV1Wt4y1G74q/">椭圆函数微科普1：五分钟构造sn及其傅里叶级数</a>
+            \begin{align}
+            &\mathrm{dn}u=\frac{\pi}{2K}+\frac{2\pi}{K}\sum_{n=1}^{\infty}{\frac{q^n\cos \frac{n\pi u}{K}}{1+q^{2n}}}
+            \\
+            &q=e^{i\pi \tau},\tau =\frac{iK\prime}{K}, =\frac{\pi}{2K}+\frac{\pi}{K}\sum_{n=1}^{\infty}{\frac{2\cos \frac{n\pi u}{K}}{q^{-n}+q^n}}
+            \\
+            &=\frac{\pi}{2K}+\frac{\pi}{K}\sum_{n=1}^{\infty}{\frac{\cos \frac{n\pi u}{K}}{\cosh n\pi \frac{K\prime}{K}}}            
+            \end{align}
+          </p>
+          <p>
+            选取参数特殊值, 就可以得到左边那个级数的求和公式
+            \begin{align}
+            &k=k\prime=\frac{1}{\sqrt{2}},K=K\prime=\frac{\Gamma ^2\left( \frac{1}{4} \right)}{4\sqrt{\pi}},\theta =\frac{\pi u}{K}
+            \\
+            &\mathrm{dn}u=\mathrm{dn}\left( u,\frac{1}{\sqrt{2}} \right) =\frac{\pi}{2K}+\frac{\pi}{K}\sum_{n=1}^{\infty}{\frac{\cos n\theta}{\cosh n\pi}}=\frac{\pi}{2K}\sum_{n=-\infty}^{\infty}{\frac{\cos n\theta}{\cosh n\pi}}
+            \end{align}
+          </p>
+          <p>
+            把参数换成虚参数, 借用椭圆函数的虚变换公式, 可以得到另一个级数的求和公式
+            $$
+            \mathrm{dn}iu=\frac{\mathrm{dn}u}{\mathrm{cn}u}=\frac{\pi}{2K}+\frac{\pi}{K}\sum_{n=1}^{\infty}{\frac{\cosh n\theta}{\cosh n\pi}}=\frac{\pi}{2K}\sum_{n=-\infty}^{\infty}{\frac{\cosh n\theta}{\cosh n\pi}}
+            $$
+          </p>
+          <p>
+            这样, 依靠椭圆函数的恒等式即可证明此式, 最后的椭圆积分特殊值可以看这篇文章:<a href="若干个椭圆积分特殊值的计算.html">若干个椭圆积分特殊值的计算</a>
+            \begin{align}
+            &\frac{1}{\left( \sum_{n=-\infty}^{\infty}{\frac{\cos k\theta}{\cosh k\pi}} \right) ^2}+\frac{1}{\left( \sum_{n=-\infty}^{\infty}{\frac{\cosh k\theta}{\cosh k\pi}} \right) ^2}=\frac{\pi ^2}{4K^2}\left( \frac{\mathrm{cn}^2u}{\mathrm{dn}^2u}+\frac{1}{\mathrm{dn}^2u} \right) 
+            \\
+            &=\frac{\pi ^2}{4K^2}\left( \frac{2-\mathrm{sn}^2u}{1-\frac{1}{2}\mathrm{sn}^2u} \right) =\frac{\pi ^2}{2K^2}=\frac{8\pi ^3}{\Gamma ^4\left( \frac{1}{4} \right)}
+            \\
+            &=\frac{2\Gamma ^4\left( \frac{3}{4} \right)}{\pi}
+            \end{align}
+          </p>
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>

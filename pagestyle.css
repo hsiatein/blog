@@ -92,8 +92,8 @@ a:visited{
     text-decoration: none;
 }
 a.backtohome{
-    position: absolute;
-    top: 320px;
+    position: relative;
+    top: 50px;
     left: 20px;
     padding: 5px 15px 5px 15px;
     background-color: aliceblue;
