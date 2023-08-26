@@ -38,6 +38,7 @@ td{
     border-radius: 10px;
 }
 body {
+    color: rgb(0, 79, 158);
     font-family: "Noto Sans SC", sans-serif;
     background-image: url('image/background.jpg');
     background-repeat: no-repeat;
