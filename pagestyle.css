@@ -7,7 +7,7 @@ header{
     width: 550px;
     height: 100px;
     background-color: aliceblue;
-    border-width: 10px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(138, 200, 255);
     border-radius: 10px;
@@ -17,16 +17,36 @@ h1#author{
     margin: 0px;
     height: 100px;
 }
+div#label{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    background-color: aliceblue;
+    border-width: 4px;
+    border-style: solid;
+    border-color: rgb(138, 200, 255);
+    border-radius: 10px;
+    padding: 10px 10px 10px 50px;
+}
+table {
+    border-spacing: 30px 0px;
+}
+td{
+    padding: 5px 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(138, 200, 255);
+    border-radius: 10px;
+}
 body {
     font-family: "Noto Sans SC", sans-serif;
-    background-image: url('image/background.jpg');
+    background-image: url('https://i0.hdslb.com/bfs/new_dyn/7fb15a3e6874a592a6cd7e34a850c7f237868202.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: scroll;
 }
 main{
     background-color: aliceblue;
-    border-width: 10px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(73, 170, 255);
     border-radius: 10px;
@@ -55,7 +75,7 @@ footer{
     margin: 100px 10px 100px 10px;
     width: 270px;
     background-color: aliceblue;
-    border-width: 10px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(138, 200, 255);
     border-radius: 10px;
@@ -71,18 +91,18 @@ a:visited{
 }
 a.backtohome{
     position: absolute;
-    top: 180px;
+    top: 320px;
     left: 20px;
     padding: 5px 15px 5px 15px;
     background-color: aliceblue;
-    border-width: 5px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(172, 216, 255);
     border-radius: 5px;
 }
 pre{
     background-color: rgb(231, 237, 242);
-    border-width: 5px;
+    border-width: 4px;
     border-style: solid;
     border-color: rgb(172, 216, 255);
     border-radius: 5px;

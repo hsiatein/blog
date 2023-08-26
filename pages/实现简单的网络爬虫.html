@@ -8,15 +8,27 @@
     <meta http-equiv="Expires" content="0">
     <title>伊吹老公的博客</title>
     <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
-    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../pagedata.js"></script>
   </head>
   <body>
     <a class="backtohome" href="../home.html">主页</a>
     <header>
       <h1 id="author">伊吹老公的博客</h1>
     </header>
+    <div id="label">
+      <table>
+        <h2>
+          标签
+        </h2>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
     <main>
         <h1 id="title">实现简单的网络爬虫</h1>
+        <script src="../labelgen.js"></script>
         <article>
             <p>
               本文将介绍以Python为工具, 在某些网站上实现简单的网络爬虫的方法. 本文涉及的网站有如下特点: 即使不需要登录也可以无限下载或者获取所需资源(如果有下载配额也可以用, 
