@@ -37,6 +37,9 @@ div#label{
     height: auto;
 }
 label{
+    width: 150px; /* Set the desired width */
+    display: inline-block; /* This ensures the width property works */
+    text-align: center;
     padding: 5px 10px;
     margin-right: 0px;
     color: rgb(0, 136, 255);

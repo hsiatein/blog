@@ -1,13 +1,3 @@
-// const files = [
-//   "实现简单的网络爬虫",
-//   "估计1形状类似Watson引理的积分估计",
-//   "估计2涉及泊松核的积分估计",
-//   "估计3有关黎曼勒贝格引理的积分估计",
-//   "估计4使用围道和极点进行积分估计",
-//   "个人所写的对数积分题集",
-//   "估计5一类涉及zeta函数的积分估计表",
-//   "讨论一下积分变换"
-// ];
 var files = JSON.parse(window.PageData);
 console.log(files);
 var ol = document.createElement("ol");
@@ -31,22 +21,22 @@ files.forEach((file) => {
 });
 document.getElementById("index").appendChild(ol);
 console.log(labels);
-var N=parseInt((labels.length-1)/10)+1;
+var N=parseInt((labels.length-1)/9)+1;
 console.log(N);
 for(var j=0;j<N;j++){
   var tr=document.createElement("tr");
-  for(var i=0;i<10;i++){
-    if(j*10+i<labels.length){
+  for(var i=0;i<9;i++){
+    if(j*9+i<labels.length){
       var td=document.createElement("td");
       var checkbox=document.createElement("input");
       checkbox.type="checkbox";
       checkbox.className="checkbox-input";
-      checkbox.id=labels[j*10+i];
-      checkbox.value=labels[j*10+i];
+      checkbox.id=labels[j*9+i];
+      checkbox.value=labels[j*9+i];
       var checkboxlabel=document.createElement("label");
       checkboxlabel.className="checkbox-label";
-      checkboxlabel.htmlFor=labels[j*10+i];
-      checkboxlabel.textContent=labels[j*10+i];
+      checkboxlabel.htmlFor=labels[j*9+i];
+      checkboxlabel.textContent=labels[j*9+i];
       td.appendChild(checkbox);
       td.appendChild(checkboxlabel);
       tr.appendChild(td);
