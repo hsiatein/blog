@@ -59,7 +59,7 @@ h2#labeltext{
 }
 body {
     font-family: "Noto Sans SC", sans-serif;
-    background-image: url('https://i0.hdslb.com/bfs/new_dyn/7fb15a3e6874a592a6cd7e34a850c7f237868202.jpg');
+    background-image: url('image/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: scroll;
