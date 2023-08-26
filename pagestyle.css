@@ -42,7 +42,7 @@ body {
     background-image: url('image/background.jpg');
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: scroll;
+    background-attachment: fixed;
     overflow-x: hidden;
 }
 main{
