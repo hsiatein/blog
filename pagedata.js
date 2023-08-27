@@ -89,6 +89,16 @@ var pagedata=[{
             "椭圆积分",
             "傅里叶级数"
         ]
+    },{
+        "name":"C#追赶法与三次样条插值",
+        "label":[
+            "数学",
+            "计算机",
+            "C#",
+            "数值分析",
+            "插值",
+            "线性代数"
+        ]
     }
 ];
 var myJSON = JSON.stringify(pagedata);

@@ -55,7 +55,7 @@ h2#labeltext{
     display: none;
 }
 .checkbox-input:not(:checked) + label {
-    border: 2px solid rgb(170, 215, 255);
+    border: 2px solid rgb(195, 227, 255);
     border-radius: 4px;
 }
 .checkbox-input:checked + label {
