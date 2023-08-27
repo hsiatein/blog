@@ -35,6 +35,7 @@ div#label{
     border-radius: 10px;
     padding: 20px;
     height: auto;
+    width: 1620px;
 }
 label{
     width: 150px; /* Set the desired width */
