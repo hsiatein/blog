@@ -18,6 +18,7 @@ h1#author{
     height: 100px;
 }
 div#label{
+    width: 1610px;
     margin-top: 30px;
     margin-bottom: 30px;
     background-color: aliceblue;
@@ -38,6 +39,7 @@ td{
     border-radius: 10px;
 }
 body {
+    width: 1680px;
     color: rgb(0, 79, 158);
     font-family: "Noto Sans SC", sans-serif;
     background-image: url('image/background.jpg');

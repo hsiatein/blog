@@ -36,6 +36,7 @@ div#label{
     padding: 20px;
     height: auto;
     width: 1620px;
+    user-select: none;
 }
 label{
     width: 150px; /* Set the desired width */
