@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet"/>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../pagedata.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <div id="label">
+      <table>
+        <h2>
+          标签
+        </h2>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+    <a class="backtohome" href="../home.html">主页</a>
+    <main>
+        <h1 id="title">C#追赶法与三次样条插值</h1>
+        <script src="../labelgen.js"></script>
+        <article>
+          <p>
+            本文将在C#实现数值分析中的三次样条插值, 首先从追赶法开始. 追赶法是一种求解三对角矩阵线性方程组的方法. 虽然高斯消元法也可以求解, 
+            但是比较复杂度显然没有追赶法划算. 追赶法本质上是LU分解方法的一种简单特殊情况, 其原理这里不详细展开, 直接给出代码. 
+          </p>
+          <pre>
+
+            //追赶法解三对角矩阵线性方程组
+            double[] Tridiagonal_Matrices_Solve(double[] f, double[] a, double[] b, double[] c)
+            {
+                int n = f.Length;
+                if (b.Length == n && a.Length == n - 1 && c.Length == n - 1)
+                {
+                    double[] beta = new double[n - 1];
+                    double[] y = new double[n];
+                    beta[0] = c[0] / b[0];
+                    y[0] = f[0] / b[0];
+                    for (int i = 1; i < n - 1; i++) 
+                    {
+                        beta[i] = c[i] / (b[i] - a[i - 1] * beta[i - 1]);
+                        y[i] = (f[i] - a[i - 1] * y[i - 1]) / (b[i] - a[i - 1] * beta[i - 1]);
+                    }
+                    y[n - 1] = (f[n - 1] - a[n - 2] * y[n - 2]) / (b[n - 1] - a[n - 2] * beta[n - 2]);
+                    double[] x = new double[n];
+                    x[n - 1] = y[n - 1];
+                    for (int i = n - 2; i > -1; i--) 
+                    {
+                        x[i] = y[i] - beta[i] * x[i + 1];
+                    }
+                    return x;
+                }
+                else return null;
+            }
+          </pre>
+          <p>
+            在三次样条插值前先介绍一下差商. 一阶情况:
+            $$f\left[ x_0,x_k \right] =\frac{f\left( x_k \right) -f\left( x_0 \right)}{x_k-x_0}$$
+            k 阶情况:
+            $$f\left[ x_0,x_1,...,x_k \right] =\frac{f\left[ x_0,x_1,...,x_{k-2},x_k \right] -f\left[ x_0,x_1,...,x_{k-2},x_{k-1} \right]}{x_k-x_{k-1}}
+            \\
+            =\frac{f\left[ x_1,x_2,...,x_k \right] -f\left[ x_0,x_1,...,x_{k-1} \right]}{x_k-x_0}$$
+            三次样条插值中需要用到差商, 所以这里同时给出差商的计算方法
+          </p>
+          <pre>
+
+//输入函数f与节点列x, 得到差商f[x0,x1,...,xn]
+double Divided_differences_1(Func<double, double> f, double[] x)
+{
+    if (x.Length == 1) 
+    {
+        return f(x[0]);
+    }
+    else if (x.Length == 2)
+    {
+        return (f(x[1]) - f(x[0])) / (x[1] - x[0]);
+    }
+    else if (x.Length > 2)
+    {
+        double[] a = new double[x.Length - 1];
+        double[] b = new double[x.Length - 1];
+        for (int i = 0; i < x.Length - 1; i++)
+        {
+            a[i] = x[i + 1];
+            b[i] = x[i];
+        }
+        return (Divided_differences_1(f, a) - Divided_differences_1(f, b)) / (x[x.Length - 1] - x[0]);
+    }
+    else return 0;
+}
+//输入节点列x与对应的函数值列f, 得到差商f[x0,x1,...,xn]
+double Divided_differences_2(double[] y, double[] x)
+{
+    if (x.Length == 1)
+    {
+        return y[0];
+    }
+    else if (x.Length == 2 && x.Length == y.Length)
+    {
+        return (y[1] - y[0]) / (x[1] - x[0]);
+    }
+    else if (x.Length > 2 && x.Length == y.Length) 
+    {
+        double[] a = new double[x.Length - 1];
+        double[] b = new double[x.Length - 1];
+        double[] ya = new double[x.Length - 1];
+        double[] yb = new double[x.Length - 1];
+        for (int i = 0; i < x.Length - 1; i++)
+        {
+            a[i] = x[i + 1];
+            b[i] = x[i];
+            ya[i] = y[i + 1];
+            yb[i] = y[i];
+        }
+        return (Divided_differences_2(ya, a) - Divided_differences_2(yb, b)) / (x[x.Length - 1] - x[0]);
+    }
+    else return 0;
+}
+          </pre>
+          <p>
+            三次样条插值函数: 若函数 \(S(x)\) 在 \([a,b]\) 二次连续可微, 在每个节点小区间都是三次函数, 且 \(S(x_i)=y_i\) , 用二阶导数值 \(S''(x_j)=M_j\) 确定插值函数
+            \(S''(x)\) , 使用分段线性插值, 得
+            \begin{align}
+            &S\prime\prime\left( x \right) =M_j\frac{x_{j+1}-x}{h_j}+M_{j+1}\frac{x-x_j}{h_j}
+            \\
+            &S\left( x \right) =M_j\frac{\left( x_{j+1}-x \right) ^3}{6h_j}+M_{j+1}\frac{\left( x-x_j \right) ^3}{6h_j}+\left( y_j-\frac{M_j{h_j}^2}{6} \right) \frac{x_{j+1}-x}{h_j}+\left( y_{j+1}-\frac{M_{j+1}{h_j}^2}{6} \right) \frac{x-x_j}{h_j}
+            \end{align}
+            其常见如下边界条件, 这里只介绍前两种的代码实现
+          </p>
+          <img src="../image/C%23追赶法与三次样条插值/2.jpg"/>
+          <p>
+            为了一阶导连续, 有第一种边界条件:
+            \begin{align}
+            &j=1,2,...,n-1
+            \\
+            &\mu _j=\frac{h_{j-1}}{h_{j-1}+h_j}
+            \\
+            &\lambda _j=1-\mu _j
+            \\
+            &\mathrm{d}_j=6f\left[ x_{j-1},x_j,x_{j+1} \right] 
+            \\
+            &\mu _jM_{j-1}+2M_j+\lambda _jM_{j+1}=\mathrm{d}_j
+            \\
+            &2M_0+M_1=\frac{6}{h_0}\left( f\left[ x_0,x_1 \right] -f\prime_0 \right) 
+            \\
+            &M_{n-1}+2M_n=\frac{6}{h_{n-1}}\left( f\prime_n-f\left[ x_{n-1},x_n \right] \right)
+            \\
+            &\lambda_0=\mu_n=1
+            \end{align}
+            将此边界条件用线性方程组表示, 即为三对角矩阵的线性方程组
+          </p>
+          <img src="../image/C%23追赶法与三次样条插值/1.jpg"/>
+          <p>
+            自然我们就能写出用追赶法求解方程从而实现三次样条插值的方法, 上面虽然没有介绍第二类边值的三次样条的方程组, 但是这里也直接给出求解方法
+          </p>
+          <pre>
+
+//第一类边值三次样条插值的系数M, 插值节点列x, 对应函数值列y, 导数边界条件dy0, dyn
+double[] interpolation_M_I(double[] x, double[]y,double dy0,double dyn)
+{
+    int n = x.Length - 1;
+    double[] h = new double[n];
+    double[] lambda = new double[n];
+    double[] mu = new double[n];
+    double[] d = new double[n + 1];
+    double[] vect2= new double[n + 1];
+    h[0] = x[1] - x[0];
+    vect2[0] = 2;
+    vect2[n] = 2;
+    lambda[0] = 1;
+    mu[n - 1] = 1;
+    d[0] = 6 * (Divided_differences_2(new double[] { y[0], y[1] }, new double[] { x[0], x[1] }) - dy0) / h[0];
+    for (int i = 1; i < n; i++) 
+    {
+        h[i] = x[i + 1] - x[i];
+        mu[i - 1] = h[i - 1] / (h[i - 1] + h[i]);
+        lambda[i] = 1 - mu[i - 1];
+        vect2[i] = 2;
+        d[i] = 6 * Divided_differences_2(new double[] { y[i - 1], y[i], y[i + 1] }, 
+          new double[] { x[i - 1], x[i], x[i + 1] });
+    }
+    d[n] = 6 * (dyn - Divided_differences_2(new double[] { y[n - 1], y[n] }, 
+      new double[] { x[n - 1], x[n] })) / h[n - 1];
+    return Tridiagonal_Matrices_Solve(d, mu, vect2, lambda);
+}
+//第二类边值三次样条插值的系数M, 插值节点列x, 对应函数值列y, 导数边界条件ddy0, ddyn
+double[] interpolation_M_II(double[] x, double[] y, double ddy0, double ddyn)
+{
+    int n = x.Length - 1;
+    double[] h = new double[n];
+    double[] lambda = new double[n];
+    double[] mu = new double[n];
+    double[] d = new double[n + 1];
+    double[] vect2 = new double[n + 1];
+    h[0] = x[1] - x[0];
+    vect2[0] = 2;
+    vect2[n] = 2;
+    lambda[0] = 0;
+    mu[n - 1] = 0;
+    d[0] = 2 * ddy0;
+    for (int i = 1; i < n; i++)
+    {
+        h[i] = x[i + 1] - x[i];
+        mu[i - 1] = h[i - 1] / (h[i - 1] + h[i]);
+        lambda[i] = 1 - mu[i - 1];
+        vect2[i] = 2;
+        d[i] = 6 * Divided_differences_2(new double[] { y[i - 1], y[i], y[i + 1] }, 
+          new double[] { x[i - 1], x[i], x[i + 1] });
+    }
+    d[n] = 2 * ddyn;
+    return Tridiagonal_Matrices_Solve(d, mu, vect2, lambda);
+}            
+          </pre>
+          <p>
+            上面的两个方法求解的是插值函数的系数, 把系数代入原插值函数就可以得到插值函数了
+          </p>
+          <pre>
+
+            //第一类边值三次样条插值函数在t的值, 插值节点列x, 对应函数值列y, 导数边界条件dy0, dyn
+            double Cubic_Spline_Interpolation_I(double t, double[] x, double[] y, double dy0, double dyn)
+            {
+                double[] M = interpolation_M_I(x, y, dy0, dyn);
+                double S = 0;
+                double h;
+                for (int i = 0; i < x.Length-1; i++)
+                {
+                    if (t >= x[i] && t <= x[i + 1]) 
+                    {
+                        h = x[i + 1] - x[i];
+                        S = M[i] * (x[i + 1] - t) * (x[i + 1] - t) * (x[i + 1] - t) / (6 * h);
+                        S = S - M[i + 1] * (x[i] - t) * (x[i] - t) * (x[i] - t) / (6 * h);
+                        S = S + (y[i] - M[i] * h * h / 6) * (x[i + 1] - t) / h;
+                        S = S - (y[i + 1] - M[i + 1] * h * h / 6) * (x[i] - t) / h;
+                        break;
+                    }
+                }
+                return S;
+            }
+            //第二类边值三次样条插值函数在t的值, 插值节点列x, 对应函数值列y, 导数边界条件ddy0, ddyn
+            double Cubic_Spline_Interpolation_II(double t, double[] x, double[] y, double ddy0, double ddyn)
+            {
+                double[] M = interpolation_M_II(x, y, ddy0, ddyn);
+                double S = 0;
+                double h;
+                for (int i = 0; i < x.Length - 1; i++)
+                {
+                    if (t >= x[i] && t <= x[i + 1])
+                    {
+                        h = x[i + 1] - x[i];
+                        S = M[i] * (x[i + 1] - t) * (x[i + 1] - t) * (x[i + 1] - t) / (6 * h);
+                        S = S - M[i + 1] * (x[i] - t) * (x[i] - t) * (x[i] - t) / (6 * h);
+                        S = S + (y[i] - M[i] * h * h / 6) * (x[i + 1] - t) / h;
+                        S = S - (y[i + 1] - M[i + 1] * h * h / 6) * (x[i] - t) / h;
+                        break;
+                    }
+                }
+                return S;
+            }
+          </pre>
+          <p>
+            本文到此结束.
+          </p>
+        </article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>

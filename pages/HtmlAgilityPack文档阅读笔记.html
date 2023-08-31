@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>伊吹老公的博客</title>
+    <link href="../pagestyle.css" type="text/css" rel="stylesheet">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../pagedata.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1 id="author">伊吹老公的博客</h1>
+    </header>
+    <div id="label">
+        <h2>
+            标签
+        </h2>
+        <table>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <a class="backtohome" href="../home.html">主页</a>
+    <main>
+        <h1 id="title">HtmlAgilityPack文档阅读笔记</h1>
+        <script src="../labelgen.js"></script>
+        <article>
+          
+
+        <p>HtmlAgilityPack是C#里一个著名项目, 可以用于解析和操作HTML文件, 这篇文章是阅读其文档时所作笔记.</p><p><b>解析器</b></p><p>HtmlAgilityPack提供了三种读取HTML的方式, 即从文件读取, 从字符串读取, 从网址读取, 从浏览器读取这个方法已经不可用了, 官方推荐使用Selenium WebDriver.</p><pre>//从文件读取
+using System;
+using System.Xml;
+using HtmlAgilityPack;
+
+var path = @"test.html";		
+var doc = new HtmlDocument();
+doc.Load(path);</pre><pre>//从字符串读取
+var html = str;//这是一段用HTML语言编写的字符串
+
+var htmlDoc = new HtmlDocument();
+htmlDoc.LoadHtml(html);</pre><pre>//从网址读取
+var html = @"https://html-agility-pack.net/";
+
+HtmlWeb web = new HtmlWeb();
+
+var htmlDoc = web.Load(html);</pre><p><b>选择器</b></p><p>HtmlAgilityPack提供了两个方法来选择元素, SelectNodes(String)以及SelectSingleNode(String), 接受的参数是XPath, 两个方法的区别是前者返回所有满足条件的元素, 后者返回第一个满足条件的元素.</p><pre>//返回一个List<htmlnode>类型的节点列表
+var htmlDoc = new HtmlDocument();
+htmlDoc.LoadHtml(html);
+
+var htmlNodes = htmlDoc.DocumentNode.SelectNodes("//td/input");</htmlnode></pre><p><b>关于XPath</b></p><p>XPath(XML Path Language)是一种用于在XML文档中定位和选择节点的查询语言. </p><p>其<a href="https://www.w3.org/TR/xpath-31/">规范</a>以及<a href="https://www.w3schools.com/xml/xpath_intro.asp">教程</a>在此给出</p><p>此外这里放出一些教程里的例子</p><img src="C:\Users\30236\Desktop\编程\HTML\image\HtmlAgilityPack文档阅读笔记\0.jpg"><img src="C:\Users\30236\Desktop\编程\HTML\image\HtmlAgilityPack文档阅读笔记\1.jpg"><img src="C:\Users\30236\Desktop\编程\HTML\image\HtmlAgilityPack文档阅读笔记\2.jpg"><img src="C:\Users\30236\Desktop\编程\HTML\image\HtmlAgilityPack文档阅读笔记\3.jpg"><img src="C:\Users\30236\Desktop\编程\HTML\image\HtmlAgilityPack文档阅读笔记\4.jpg"><p>需要注意的是, 在XPath里数组索引从1开始</p><p><b>操作</b></p><p>使用HtmlAgilityPack可以对HTML进行操作, 提供了四个属性.</p><p>InnerHtml属性可以读写, 为元素内所有的子元素以及文本.</p><p>InnerText属性只读, 为元素内所有的文本.</p><p>OuterHtml属性只读, 相比于InnerHtml多了自身的前后两个tags. </p><p>ParentNode属性只读, 为此节点的父节点.</p><p>HtmlAgilityPack提供的方法如下:</p><p>AppendChild()添加一个子节点, AppendChildren()添加一列子节点</p><p>Clone(), 我想得到一个和节点A一样的节点B, 直接复制B会得到A所指向的地址, 而使用clone函数会在内存开辟新的空间使得B和A是独立的. CloneNode(Boolean), 取值true时会克隆所有的子节点, 取值false只克隆自己, 不克隆子节点. CloneNode(String)在克隆的同时改名(只影响克隆出的节点). CloneNode(String, Boolean)参数含义同上.</p><pre>HtmlNode newHtmlBody = htmlBody.Clone();</pre><p>另一个类似的是CopyFrom(HtmlNode)以及CopyFrom(HtmlNode, Boolean), 与clone的区别是, 这个函数不能用于创建新节点, 只能把节点B复制到已有节点A上.</p><pre>newBody.CopyFrom(htmlBody);</pre><p>CreateNode()可以用于创建节点, 以及虽然文档没提到, 但是VS里可以看到CreateElement(), 可以用于创建元素</p><pre>HtmlNode newPara = HtmlNode.CreateNode(str);//str为HTML语法的字符串
+//添加p元素
+HtmlNode pElement = doc.CreateElement("p");</pre><p>InsertAfter()和InsertBefore()用于在指定的节点的后面或前面插入节点, PrependChild()在所有姊妹节点的最前面加一个特定节点, PrependChildren()在所有姊妹节点的最前面加一列特定节点.</p><pre>htmlBody.InsertAfter(node);
+htmlBody.InsertBefore(node);
+htmlBody.PrependChild(node);
+htmlBody.PrependChildren(nodes);</pre><p>Remove()方法用于删除一个节点的所有东西(包括子节点). RemoveAll()方法用于删除一个节点的所有子节点和属性, 但是会留下节点自己的tags. RemoveAllChildren()方法用于删除一个节点的所有子节点, 属性则留下. RemoveChild(HtmlNode)删除一个特定的节点. RemoveChild(HtmlNode, Boolean)删除一个特定的节点, 但是如果输入true, 会保留子节点.</p><p>ReplaceChild()方法可以替换节点</p><pre>//把htmlBody的oldChild节点换成newChild节点
+htmlBody.ReplaceChild(newChild, oldChild);</pre><p><b>遍历</b></p><p>提供了五个属性. ChildNodes是本节点的所有子节点, FirstChild是第一个子节点, LastChild是最后一个子节点, NextSibling是接着的下一个元素, ParentNode是父节点.</p><p>提供的方法如下:</p><p>Ancestors()返回所有祖先节点的枚举, Ancestors(String)返回所有匹配名字的祖先节点, AncestorsAndSelf()返回所有祖先节点和自己, AncestorsAndSelf(String)返回所有匹配名字的祖先节点和自己. </p><p>Descendants()返回所有后代节点的枚举, Descendants(String)返回所有匹配名字的后代节点, DescendantsAndSelf()返回所有后代节点和自己, DescendantsAndSelf(String)返回所有匹配名字的后代节点和自己. </p><p>DescendantNodes()同Descendants(), DescendantNodesAndSelf(string)同DescendantsAndSelf().</p><p>Element(string)返回匹配名字的第一个子节点, Elements(string)返回匹配名字的子节点列</p><p><b>写入器</b></p><p>对于HtmlDocument提供了Save方法来保存</p><p>Save(String)把HTML文档写入地址string</p><p>Save(Stream), Save(StreamWriter), Save(TextWriter), Save(XmlWriter)把HTML文档通过特殊的流或文档写入器写入文件.</p><p>此外还可以用Save(Stream, Encoding), Save(String, Encoding)规定编码</p><p>对于HtmlNode提供了如下方法来保存</p><p>WriteContentTo()把节点内容及子节点写入字符串</p><p>WriteTo()把节点tag, 节点内容及子节点写入字符串</p><p><b>实用</b></p><p>HtmlAgilityPack提供了检测编码格式的方法:</p><p>DetectEncoding(Stream), DetectEncoding(TextReader), DetectEncoding(String)</p><p>此外还有检测完编码格式就读取的方法:</p><p>DetectEncodingAndLoad(String), DetectEncodingAndLoad(String, Boolean), 其中布尔值决定是否检测编码, true表示检测</p><p>本文到此结束</p></article>
+    </main>
+    <footer>
+        <h2>联系我</h2>
+        <p><b>邮箱</b>: 3023625451@qq.com</p>
+        <p><b>bilibili</b>: <a href="https://space.bilibili.com/37868202">小妹魔伊吹妹妹</a></p>
+        <p><b>知乎</b>: <a href="https://www.zhihu.com/people/shu-li-ke-dai-biao-lei-mi-li-ya">浅黄睦月</a></p>
+        <p><b>QQ</b>: 3023625451</p>
+    </footer>
+  </body>
+</html>
