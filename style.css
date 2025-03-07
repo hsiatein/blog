@@ -4,14 +4,16 @@ header{
     margin: 0 auto; 
     display: block;
     text-align: center;
-    width: 550px;
-    height: 100px;
+    width: 800px;
+    height: auto;
     background-color: rgb(211, 234, 255);
     border-width: 4px;
     border-style: solid;
     border-color: rgb(54, 161, 255);
+    /* border-image: linear-gradient(to right, rgb(71, 169, 255), rgb(54, 139, 213),rgb(43, 156, 255)) 1; */
+    border-image-slice: 1;
     border-radius: 10px;
-}
+} 
 h1#author{
     color: rgb(0, 136, 255);
     margin: 0px;
@@ -19,12 +21,12 @@ h1#author{
 }
 table{
     border-collapse: separate;
-    border-spacing: 0px 30px;
-
+    border-spacing: 5px 5px;
+    width: 100%;
 }
 td{
-    border: 1px solid transparent;
-    width: 160px;
+    border: 0px solid transparent;
+    width: 10%;
 }
 div#label{
     margin-top: 50px;
@@ -35,14 +37,14 @@ div#label{
     border-radius: 10px;
     padding: 20px;
     height: auto;
-    width: 1620px;
+    width: 97%;
     user-select: none;
 }
 label{
-    width: 150px; /* Set the desired width */
+    width: 100%; /* Set the desired width */
     display: inline-block; /* This ensures the width property works */
     text-align: center;
-    padding: 5px 10px;
+    padding: 5px 0px;
     margin-right: 0px;
     color: rgb(0, 136, 255);
 }
@@ -62,16 +64,19 @@ h2#labeltext{
     border: 2px solid rgb(12, 142, 255);
     border-radius: 4px;
 }
+.checkbox-label{
+    width: 100%;
+}
 body {
     color: rgb(0, 79, 158);
     font-family: "Noto Sans SC", sans-serif;
-    background-image: url('image/background.jpg');
+    background-image: url('image/background.png');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 div#index{
-    width: 400px;
+    width: 25%;
     position: relative;
     top: -700px;
     border-width: 4px;
@@ -83,8 +88,8 @@ div#index{
 }
 div#intro{
     position: relative;
-    left: 600px;
-    width: 800px;
+    left: 40%;
+    width: 50%;
     height: 600px;
     padding: 20px;
     border-width: 4px;
@@ -138,7 +143,7 @@ footer{
     top: -600px;
     font-family: "Noto Sans SC", sans-serif;
     margin: 100px 10px 100px 10px;
-    width: 270px;
+    width: 20%;
     background-color: aliceblue;
     border-width: 4px;
     border-style: solid;
